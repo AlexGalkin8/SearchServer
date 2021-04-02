@@ -1,0 +1,7 @@
+Debug/
+\Release/
+.vs/
+SearchServer in files.sln
+SearchServer in files.vcxproj
+SearchServer in files.vcxproj.filters
+SearchServer in files.vcxproj.user
