@@ -14,16 +14,20 @@ void RemoveDuplicates(SearchServer& search_server)
     for (const int document_id : search_server)
     {
         std::set<std::string> doc_words;
-        documents.emplace();
-        for (auto& [str, freq] : search_server.GetWordFrequencies(document_id))
-        {
-            doc_words.insert(str);
-        }
 
-        if (!documents.emplace(doc_words, document_id).second)
+        auto doc_frequencies = search_server.GetWordFrequencies(document_id);
+
+        std::transform(doc_frequencies.begin(), doc_frequencies.end(),
+            std::inserter(doc_words, doc_words.end()), [](auto word) {return word.first; });
+
+        if (documents.count(doc_words) == 1)
         {
             documents_to_deleted.push_back(document_id);
             std::cout << "Found duplicate document id " << document_id << std::endl;
+        }
+        else
+        {
+            documents.emplace(doc_words, document_id);
         }
     }
 

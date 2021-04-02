@@ -107,18 +107,13 @@ void SearchServer::RemoveDocument(int document_id)
     document_ids_.erase(document_id);
     documents_.erase(document_id);
 
-    std::set<std::string> delete_words;
-    for (auto& [word, documents] : word_to_document_freqs_)
+    for (auto& [word, _] : GetWordFrequencies(document_id))
     {
-        if (documents.count(document_id))
-            documents.erase(document_id);
+        word_to_document_freqs_.at(word).erase(document_id);
 
-        if (documents.empty())
-            delete_words.insert(word);
+        if (word_to_document_freqs_.at(word).empty())
+            word_to_document_freqs_.erase(word);
     }
-
-    for (const std::string& word : delete_words)
-        word_to_document_freqs_.erase(word);
 }
 
 
