@@ -28,6 +28,7 @@ void SearchServer::AddDocument(int document_id,
     for (const std::string& word : words)
     {
         // Each time a word is repeated in a document, the frequency increases.
+        document_to_word_freqs_[document_id][word] += inv_word_count;
         word_to_document_freqs_[word][document_id] += inv_word_count;
     }
 
@@ -83,18 +84,13 @@ std::tuple<std::vector<std::string>, DocumentStatus> SearchServer::MatchDocument
 const std::map<std::string, double>& SearchServer::GetWordFrequencies(int document_id) const
 {
     static std::map<std::string, double> word_frequencies;
+
     word_frequencies.clear();
 
     if (documents_.count(document_id) == 0)
         return word_frequencies;
 
-    for (const auto& [word, documents] : word_to_document_freqs_)
-    {
-        if (documents.count(document_id))
-        {
-            word_frequencies.emplace(word, documents.at(document_id));
-        }
-    }
+    word_frequencies = document_to_word_freqs_.at(document_id);
 
     return word_frequencies;
 }

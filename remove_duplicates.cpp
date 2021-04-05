@@ -20,7 +20,7 @@ void RemoveDuplicates(SearchServer& search_server)
         std::transform(doc_frequencies.begin(), doc_frequencies.end(),
             std::inserter(doc_words, doc_words.end()), [](auto word) {return word.first; });
 
-        if (documents.count(doc_words) == 1)
+        if (documents.count(doc_words))
         {
             documents_to_deleted.push_back(document_id);
             std::cout << "Found duplicate document id " << document_id << std::endl;

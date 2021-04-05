@@ -106,6 +106,7 @@ private:
 
     std::set<int> document_ids_;
     const std::set<std::string> stop_words_;
+    std::map<int, std::map<std::string, double>> document_to_word_freqs_;
 
     /* @param std::string - word from document;
      * @param std::map<int, double>]:
