@@ -1,5 +1,5 @@
 Debug/
-\Release/
+Release/
 .vs/
 SearchServer in files.sln
 SearchServer in files.vcxproj

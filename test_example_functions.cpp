@@ -72,7 +72,7 @@ namespace search_server_testing
     {
         SearchServer search_server = GetSearchServer();
 
-        std::tuple<std::vector<std::string>, DocumentStatus> match_document =
+        std::tuple<std::vector<std::string_view>, DocumentStatus> match_document =
             search_server.MatchDocument("-ухоженный ухоженный -кот", 0);
 
         ASSERT_HINT(std::get<0>(match_document).empty(),

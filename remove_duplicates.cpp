@@ -9,11 +9,11 @@
 void RemoveDuplicates(SearchServer& search_server)
 {
     std::vector<int> documents_to_deleted; // @param int - document_id.
-    std::map<std::set<std::string>, int> documents;
+    std::map<std::set<std::string_view>, int> documents;
 
     for (const int document_id : search_server)
     {
-        std::set<std::string> doc_words;
+        std::set<std::string_view> doc_words;
 
         auto doc_frequencies = search_server.GetWordFrequencies(document_id);
 
